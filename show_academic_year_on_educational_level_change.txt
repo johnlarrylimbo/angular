@@ -1,0 +1,25 @@
+$scope.academic_year_enabled = false;
+
+// Educational level select on change.
+	$scope.EducationalLevelChange = function(filter){
+		$scope.educational_level_filtered_list = [];
+		$scope.AcademicYearEnable(filter);
+		$('#educational_level').material_select('destroy');
+
+		for(i in $scope.educational_level_list){
+			if($scope.educational_level_list[i].educational_level_id == filter){
+				$scope.educational_level_filtered_list.push($scope.educational_level_list[i]);
+			}
+		}
+
+	 	$timeout(function () {
+			$('#educational_level').material_select();
+     	});
+	};
+	// End of department select on change.
+
+// Show academic year when educational level is 1, 2 or 3
+	$scope.AcademicYearEnable = function(id){
+		$scope.academic_year_enabled = (id == 1 || id == 2 || id ==3) ? true : false;
+	};
+	// end
