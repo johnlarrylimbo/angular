@@ -1,0 +1,38 @@
+$scope.semester_enabled = false;
+
+// Educational level select on change.
+	$scope.EducationalLevelChange = function(filter){
+		$scope.educational_level_filtered_list = [];
+		$scope.AcademicYearEnable(filter);
+		$scope.SemesterEnable(filter);
+		$('#educational_level').material_select('destroy');
+
+		for(i in $scope.educational_level_list){
+			if($scope.educational_level_list[i].educational_level_id == filter){
+				$scope.educational_level_filtered_list.push($scope.educational_level_list[i]);
+			}
+		}
+
+	 	$timeout(function () {
+			$('#educational_level').material_select();
+     	});
+	};
+	// End of department select on change.
+
+// Show semester when educational level is 1, 2 or 3
+	$scope.SemesterEnable = function(id){
+		$scope.semester_enabled = (id == 4 || id == 5 || id == 6 || id == 7) ? true : false;
+	};
+	// end
+
+
+/*HTML*/
+<div class="input-field col s12 m12 l4" ng-show="semester_enabled" ng-disabled="!semester_enabled" >
+      							<select id="semester" ng-model="semester_filter">
+      								<option value="" selected disabled>Select Semester</option>
+      								<cfloop query="option_semester">
+      									<option value="#option_semester.semester_id#">#option_semester.description#</option>
+      								</cfloop>
+      							</select>
+      							<label>Semester</label>
+      						</div> <!--- End of select field --->

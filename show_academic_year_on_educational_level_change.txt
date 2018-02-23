@@ -23,3 +23,14 @@ $scope.academic_year_enabled = false;
 		$scope.academic_year_enabled = (id == 1 || id == 2 || id ==3) ? true : false;
 	};
 	// end
+
+<!--- HTML Code --->
+<div class="input-field col s12 m12 l3" ng-show="academic_year_enabled" ng-disabled="!academic_year_enabled">
+      							<select id="academic_year" ng-model="academic_year_filter">
+      								<option value="" selected disabled>Select Academic year</option>
+      								<cfloop query="option_academic_year">
+      									<option value="#option_academic_year.academic_year_id#">#option_academic_year.description#</option>
+      								</cfloop>
+      							</select>
+      							<label>Academic Year</label>
+      						</div> <!--- End of select field ---> 
